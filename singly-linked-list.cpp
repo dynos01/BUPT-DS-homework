@@ -2,12 +2,11 @@
  * License: GPLv3
  * BUPT DS homework: singly linked list with header node
  * Tested under G++ 9.2.0, with minimal parameters
- * Author: Yinuo Deng<i@dyn.im>
- * Last modified: Tue 08 Oct 2019 19:49:53 PM CST
+ * Author: Yinuo Deng <i@dyn.im>
+ * Last modified: Tue 08 Oct 2019 23:51:25 PM CST
 */
 
 #include <iostream>
-#include <algorithm>
 
 typedef struct Node {
     int data;
