@@ -23,7 +23,7 @@ std::string mark(std::string exp) {
         else if (j != 0 && myStack[j - 1] == '[' && myStack[j] == ']') j--;
         else j++;
     }
-    for(size_t i = 0; i < j; i++) ret[indexStack[i]] = '^';
+    while (j-- > 0) ret[indexStack[j]] = '^';
     delete [] myStack;
     delete [] indexStack;
     return ret;
