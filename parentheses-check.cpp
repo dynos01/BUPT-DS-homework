@@ -3,7 +3,7 @@
  * BUPT DS homework: Parentheses Check
  * Tested under G++ 9.2.0, with minimal parameters
  * Author: Yinuo Deng <i@dyn.im>
- * Last modified: Tue 22 Oct 2019 19:31:16 PM CST
+ * Last modified: Tue 22 Oct 2019 20:05:28 PM CST
 */
 
 #include <iostream>
@@ -13,7 +13,7 @@ bool match(std::string exp) {
     int j = 0;
     std::string pSet = "()[]";
     char *myStack = new char[exp.length()];
-    for (size_t i = 0; i <= exp.length() && exp.length() > 0; i++) {
+    for (size_t i = 0; i < exp.length() && exp.length() > 0; i++) {
         if (pSet.find(exp[i]) == std::string::npos) continue;
         myStack[j] = exp[i];
         if (j == 0) j++;
