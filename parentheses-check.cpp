@@ -7,26 +7,39 @@
 
 #include <iostream>
 #include <string>
+#ifdef _WIN32
+#include "windows.h"
+#endif
 
-bool match(std::string exp) {
-    int j = 0;
-    std::string pSet = "()[]";
+std::string mark(std::string exp) {
+    size_t j = 0;
+    std::string pSet = "()[]", ret = std::string(exp.length(), ' ');
     char *myStack = new char[exp.length()];
+    size_t *indexStack = new size_t[exp.length()];
     for (size_t i = 0; i < exp.length() && exp.length() > 0; i++) {
         if (pSet.find(exp[i]) == std::string::npos) continue;
-        myStack[j] = exp[i];
-        if (j == 0) j++;
-        else if (myStack[j - 1] == '(' && myStack[j] == ')') j--;
-        else if (myStack[j - 1] == '[' && myStack[j] == ']') j--;
+        myStack[j] = exp[i], indexStack[j] = i;
+        if (j != 0 && myStack[j - 1] == '(' && myStack[j] == ')') j--;
+        else if (j != 0 && myStack[j - 1] == '[' && myStack[j] == ']') j--;
         else j++;
     }
+    for(size_t i = 0; i < j; i++) ret[indexStack[i]] = '^';
     delete [] myStack;
-    return j == 0;
+    delete [] indexStack;
+    return ret;
 }
 
 int main(void) {
     std::string exp;
     std::getline(std::cin, exp);
-    std::cout << (match(exp) ? "Yes" : "No") << std::endl;
+    #ifdef __unix__
+    std::cout << "\033[31m" << mark(exp) << "\033[0m\n";
+	#elif _WIN32
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+	std::cout << mark(exp) << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+	#else
+	std::cout << mark(exp) << std::endl;
+	#endif
     return 0;
 }
