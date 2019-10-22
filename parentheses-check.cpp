@@ -3,7 +3,6 @@
  * BUPT DS homework: Parentheses Check
  * Tested under G++ 9.2.0, with minimal parameters
  * Author: Yinuo Deng <i@dyn.im>
- * Last modified: Tue 22 Oct 2019 20:05:28 PM CST
 */
 
 #include <iostream>
@@ -22,7 +21,7 @@ bool match(std::string exp) {
         else j++;
     }
     delete [] myStack;
-    return j <= 0;
+    return j == 0;
 }
 
 int main(void) {
