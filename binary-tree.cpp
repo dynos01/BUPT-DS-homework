@@ -42,6 +42,7 @@ int main(void) {
     for (size_t i = 0; i < size; i++) std::cin >> level.data[i];
     for (size_t i = 0; i < size; i++) std::cin >> in[i];
     BiTree root = createFromIL(in, level, 0, size - 1);
+    delete [] level.data;
     delete [] in;
     printTree(root);
     printf("Tree height: %u\n", getHeight(root));
@@ -86,6 +87,8 @@ BiTree createFromIL(Type *in, Vector level, size_t L, size_t R) {
     }
     root->lchild = createFromIL(in, lLevel, L, temp - 1);
     root->rchild = createFromIL(in, rLevel, temp + 1, R);
+    delete [] rLevel.data;
+    delete [] lLevel.data;
     return root;
 }
 
